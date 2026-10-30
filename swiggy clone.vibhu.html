@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Swiggy - Order Food Online</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --orange: #ff4d2e;
+    --white: #ffffff;
+    --dark: #282c3f;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    color: var(--dark);
+}
+
+/* HERO BACKGROUND */
+
+.hero {
+    min-height: 650px;
+    background: linear-gradient(115deg, #ff4d2e, #e94525);
+    color: white;
+    overflow: hidden;
+    position: relative;
+}
+
+/* NAVBAR */
+
+.navbar {
+    max-width: 1250px;
+    margin: auto;
+    padding: 30px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.logo {
+    color: white;
+    font-size: 34px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+
+.app-btn,
+.signin-btn {
+    padding: 15px 22px;
+    border-radius: 14px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.app-btn {
+    border: 1px solid rgba(255,255,255,0.8);
+}
+
+.signin-btn {
+    background: #282c3f;
+}
+
+/* HERO CONTENT */
+
+.hero-content {
+    max-width: 1050px;
+    margin: 25px auto 0;
+    padding: 0 25px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h1 {
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.25;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 28px;
+}
+
+/* SEARCH BOXES */
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin: auto;
+    max-width: 850px;
+}
+
+.search-box {
+    background: white;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    padding: 0 17px;
+    border-radius: 14px;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.location-box {
+    flex: 0.8;
+}
+
+.food-box {
+    flex: 1.2;
+}
+
+.search-box .icon {
+    font-size: 20px;
+}
+
+.search-box input {
+    width: 100%;
+    min-width: 0;
+    border: none;
+    outline: none;
+    color: #282c3f;
+    font-size: 14px;
+    background: transparent;
+}
+
+.search-box input::placeholder {
+    color: #777;
+}
+
+.search-box button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* DECORATIVE FOOD IMAGE */
+
+.decor-food {
+    position: absolute;
+    width: 220px;
+    height: 310px;
+    object-fit: cover;
+    border-radius: 25px;
+    opacity: 0.9;
+    top: 175px;
+    right: -85px;
+    transform: rotate(-9deg);
+    z-index: 1;
+}
+
+.decor-left {
+    position: absolute;
+    width: 190px;
+    height: 290px;
+    object-fit: cover;
+    border-radius: 25px;
+    top: 200px;
+    left: -110px;
+    transform: rotate(9deg);
+    opacity: 0.7;
+}
+
+/* SERVICE CARDS */
+
+.services {
+    max-width: 1250px;
+    margin: -5px auto 0;
+    padding: 0 25px 55px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    position: relative;
+    z-index: 3;
+}
+
+.service-card {
+    min-height: 280px;
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    padding: 27px 25px 0;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.service-card h2 {
+    font-size: 25px;
+    color: #282c3f;
+    margin-bottom: 8px;
+}
+
+.service-card h4 {
+    color: #777;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 17px;
+}
+
+.discount {
+    color: #ff4d2e;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.service-card img {
+    position: absolute;
+    width: 165px;
+    height: 130px;
+    object-fit: cover;
+    right: 0;
+    bottom: 0;
+    border-radius: 70px 0 0 0;
+}
+
+.arrow {
+    position: absolute;
+    bottom: 18px;
+    left: 25px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: #ff4d2e;
+    font-size: 22px;
+}
+
+/* LOWER SECTION */
+
+.popular {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 45px 25px;
+}
+
+.popular h2 {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.popular p {
+    color: #777;
+    line-height: 1.7;
+}
+
+/* FOOTER */
+
+footer {
+    background: #f7f7f7;
+    text-align: center;
+    padding: 25px;
+    color: #777;
+    font-size: 14px;
+}
+
+/* NOTIFICATION */
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translate(-50%, 100px);
+    opacity: 0;
+    padding: 14px 20px;
+    border-radius: 10px;
+    background: #282c3f;
+    color: white;
+    z-index: 10;
+    transition: 0.3s;
+    text-align: center;
+    max-width: 90%;
+}
+
+.toast.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+
+    .nav-links {
+        gap: 16px;
+    }
+
+    .hero-content {
+        margin-top: 25px;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .decor-food {
+        width: 140px;
+        right: -80px;
+    }
+
+    .decor-left {
+        display: none;
+    }
+
+    .services {
+        gap: 15px;
+    }
+
+    .service-card {
+        padding: 22px 16px 0;
+        min-height: 255px;
+    }
+
+    .service-card h2 {
+        font-size: 20px;
+    }
+
+    .service-card img {
+        width: 125px;
+        height: 110px;
+    }
+
+    .arrow {
+        left: 16px;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .hero {
+        min-height: 600px;
+    }
+
+    .navbar {
+        padding: 20px 17px;
+        gap: 18px;
+    }
+
+    .logo {
+        font-size: 29px;
+    }
+
+    .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
+    .app-btn,
+    .signin-btn {
+        padding: 11px 12px;
+        font-size: 12px;
+    }
+
+    .hero-content {
+        margin-top: 30px;
+        padding: 0 17px;
+    }
+
+    .hero-content h1 {
+        font-size: 32px;
+        margin-bottom: 24px;
+    }
+
+    .search-container {
+        flex-direction: column;
+    }
+
+    .search-box {
+        width: 100%;
+        flex: auto;
+        height: 55px;
+    }
+
+    .decor-food {
+        width: 100px;
+        height: 160px;
+        right: -65px;
+        top: 300px;
+        opacity: 0.45;
+    }
+
+    .services {
+        margin-top: -10px;
+        grid-template-columns: 1fr;
+        padding: 0 17px 35px;
+        gap: 18px;
+    }
+
+    .service-card {
+        min-height: 235px;
+        padding: 25px;
+    }
+
+    .service-card h2 {
+        font-size: 24px;
+    }
+
+    .service-card img {
+        width: 155px;
+        height: 120px;
+    }
+
+    .arrow {
+        left: 25px;
+    }
+
+    .popular {
+        padding: 35px 20px;
+    }
+
+    .popular h2 {
+        font-size: 23px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <a class="logo" href="#">Swiggy</a>
+
+        <div class="nav-links">
+            <a href="#popular">Swiggy Corporate</a>
+            <a href="#services">Partner with us</a>
+        </div>
+
+        <a href="#services" class="app-btn">Get the App ↗</a>
+        <a href="#" class="signin-btn" id="signIn">Sign In</a>
+
+    </nav>
+
+    <!-- DECORATIVE IMAGES -->
+    <img
+        class="decor-left"
+        src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=500&q=80"
+        alt=""
+    >
+
+    <img
+        class="decor-food"
+        src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=500&q=80"
+        alt=""
+    >
+
+    <!-- MAIN HEADING -->
+    <div class="hero-content">
+
+        <h1>
+            Order food & groceries. Discover<br>
+            best restaurants. Swiggy it!
+        </h1>
+
+        <div class="search-container">
+
+            <div class="search-box location-box">
+                <span class="icon">📍</span>
+                <input
+                    id="location"
+                    type="text"
+                    placeholder="Enter your delivery location"
+                    aria-label="Delivery location"
+                >
+                <button id="locationButton" aria-label="Set location">⌄</button>
+            </div>
+
+            <div class="search-box food-box">
+                <input
+                    id="foodSearch"
+                    type="text"
+                    placeholder="Search for restaurant, item or more"
+                    aria-label="Search for restaurants or food"
+                >
+                <button id="searchButton" aria-label="Search">⌕</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SERVICE CARDS -->
+<section class="services" id="services">
+
+    <article class="service-card" data-service="Food Delivery">
+        <h2>FOOD DELIVERY</h2>
+        <h4>ORDER FROM TOP RESTAURANTS</h4>
+        <div class="discount">UPTO 60% OFF</div>
+
+        <img
+            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=450&q=80"
+            alt="Food delivery"
+        >
+
+        <div class="arrow">→</div>
+    </article>
+
+    <article class="service-card" data-service="Instamart">
+        <h2>INSTAMART</h2>
+        <h4>INSTANT GROCERY</h4>
+        <div class="discount">UPTO 60% OFF</div>
+
+        <img
+            src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=450&q=80"
+            alt="Fresh groceries"
+        >
+
+        <div class="arrow">→</div>
+    </article>
+
+    <article class="service-card" data-service="Dineout">
+        <h2>DINEOUT</h2>
+        <h4>EAT OUT & SAVE MORE</h4>
+        <div class="discount">UPTO 50% OFF</div>
+
+        <img
+            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=450&q=80"
+            alt="Restaurant dining"
+        >
+
+        <div class="arrow">→</div>
+    </article>
+
+</section>
+
+
+
+<section class="popular" id="popular">
+
+    <h2>Discover the best food near you</h2>
+
+    <p>
+        Explore restaurants, order your favourite food,
+        shop for groceries, and discover great places to dine.
+    </p>
+
+</section>
+
+
+
+<footer>
+    <p>Swiggy Clone Project | Created for learning purposes</p>
+</footer>
+
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+<script>
+const toast = document.getElementById("toast");
+let toastTimer;
+
+function showMessage(message) {
+    clearTimeout(toastTimer);
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
+}
+document.getElementById("locationButton").addEventListener("click", () => {
+    const location = document.getElementById("location").value.trim();
+
+    if (!location) {
+        showMessage("Please enter your delivery location.");
+        document.getElementById("location").focus();
+        return;
+    }
+
+    showMessage("Delivery location: " + location);
+});
+
+document.getElementById("location").addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+        document.getElementById("locationButton").click();
+    }
+});
+
+// Search
+function searchFood() {
+    const query = document.getElementById("foodSearch").value.trim();
+
+    if (!query) {
+        showMessage("Please enter a restaurant or food name.");
+        document.getElementById("foodSearch").focus();
+        return;
+    }
+
+    showMessage('Searching for "' + query + '"...');
+
+    
+}
+
+document.getElementById("searchButton").addEventListener("click", searchFood);
+
+document.getElementById("foodSearch").addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+        searchFood();
+    }
+});
+
+// Service cards
+document.querySelectorAll(".service-card").forEach(card => {
+    card.addEventListener("click", () => {
+        showMessage(card.dataset.service + " selected!");
+    });
+});
+
+
+document.getElementById("signIn").addEventListener("click", event => {
+    event.preventDefault();
+    showMessage("Sign In page will be added next!");
+});
+</script>
+
+</body>
+</html>
